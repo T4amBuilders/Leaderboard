@@ -1,0 +1,10 @@
+^C:\USERS\KYLIA\DESKTOP\NEW FOLDER\LEADERBOARD_APP\FRONTEND\WINDOWS\RUNNER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/kylia/Desktop/New folder/leaderboard_app/frontend/windows" "-BC:/Users/kylia/Desktop/New folder/leaderboard_app/frontend/build/windows/x64" --check-stamp-file "C:/Users/kylia/Desktop/New folder/leaderboard_app/frontend/build/windows/x64/runner/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

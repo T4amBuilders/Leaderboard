@@ -1,0 +1,38 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./backend/.env:/app/.env
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://leaderboard:password@db:5432/leaderboard
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: leaderboard
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: leaderboard
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  mynetwork:
+    driver: bridge
