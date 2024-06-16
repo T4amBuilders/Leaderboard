@@ -21,9 +21,6 @@ down:
 restart:
 	@echo "Stopping the Flutter web server..."
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) restart
-	@echo "IP Adress: "
-	docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' leaderboard_app-db-1
-
 
 # Visualiser les logs
 logs:
