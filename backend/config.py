@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 
+# Charger les variables d'environnement à partir de .env
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+class NeonConfig:
+    DATABASE_URL= os.getenv("DATABASE_URL")  # PostgreSQL connection URL

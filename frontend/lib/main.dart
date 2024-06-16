@@ -9,16 +9,22 @@ void main() {
 
 class User {
   final int id;
-  final String name;
+  final String username;
   final String email;
+  final String fullName;
 
-  User({required this.id, required this.name, required this.email});
+  User(
+      {required this.id,
+      required this.username,
+      required this.email,
+      required this.fullName});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
-      name: json['name'],
+      username: json['username'],
       email: json['email'],
+      fullName: json['full_name'],
     );
   }
 }
@@ -77,7 +83,7 @@ class _UserListState extends State<UserList> {
                 itemCount: users.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(users[index].name),
+                    title: Text(users[index].username),
                     subtitle: Text(users[index].email),
                   );
                 },

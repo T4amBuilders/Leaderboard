@@ -1,10 +1,15 @@
+# schemas.py
 from pydantic import BaseModel
 
 class UserBase(BaseModel):
-    name: str
+    username: str
     email: str
+    full_name: str
 
 class UserCreate(UserBase):
+    password: str
+
+class UserUpdate(UserBase):
     password: str
 
 class User(UserBase):

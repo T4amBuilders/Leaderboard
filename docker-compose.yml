@@ -9,30 +9,29 @@ services:
       - ./backend:/app
       - ./backend/.env:/app/.env
     environment:
-      - DATABASE_URL=postgresql+asyncpg://leaderboard:password@db:5432/leaderboard
-    depends_on:
-      - db
-    networks:
-      - mynetwork
+      - DATABASE_URL=postgresql://leaderboard_owner:XKxWby7PDM5R@ep-fancy-mode-a2wxm1lh.eu-central-1.aws.neon.tech/leaderboard?sslmode=require
+    # depends_on:
+    #   - db
+    # networks:
+    #   - mynetwork
+#   db:
+#     image: postgres:latest
+#     restart: always
+#     ports:
+#       - "5432:5432"
+#     environment:
+#       POSTGRES_USER: leaderboard
+#       POSTGRES_PASSWORD: password
+#       POSTGRES_DB: leaderboard
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     networks:
+#       - mynetwork
 
-  db:
-    image: postgres:latest
-    restart: always
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: leaderboard
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: leaderboard
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - mynetwork
+# volumes:
+#   postgres_data:
+#     driver: local
 
-volumes:
-  postgres_data:
-    driver: local
-
-networks:
-  mynetwork:
-    driver: bridge
+# networks:
+#   mynetwork:
+#     driver: bridge

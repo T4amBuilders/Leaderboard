@@ -1,28 +1,42 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
-from crud import get_users, create_user, get_user
-from schemas import User, UserCreate
-from database import AsyncSessionLocal
-from typing import List
+from sqlalchemy.orm import Session
+from crud import create_user, get_user, get_users, update_user, delete_user
+from database import SessionLocal
+from schemas import UserCreate, User
 
 router = APIRouter()
 
-async def get_db():
-    async with AsyncSessionLocal() as session:
-        yield session
-
-@router.get("/users/", response_model=List[User])
-async def read_users(skip: int = 0, limit: int = 10, db: AsyncSession = Depends(get_db)):
-    users = await get_users(db, skip=skip, limit=limit)
-    return users
+# Dependency to get the database session
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @router.post("/users/", response_model=User)
-async def create_user_endpoint(user: UserCreate, db: AsyncSession = Depends(get_db)):
-    return await create_user(db, user)
+def create_user_api(user: UserCreate, db: Session = Depends(get_db)):
+    db_user = create_user(db=db, user=user)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User creation failed")
+    return db_user
 
 @router.get("/users/{user_id}", response_model=User)
-async def read_user(user_id: int, db: AsyncSession = Depends(get_db)):
-    db_user = await get_user(db, user_id)
+def read_user(user_id: int, db: Session = Depends(get_db)):
+    db_user = get_user(db, user_id)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+@router.get("/users/", response_model=list[User])
+def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    users = get_users(db, skip, limit)
+    return users
+
+@router.put("/users/{user_id}", response_model=User)
+def update_user_api(user_id: int, user_data: UserCreate, db: Session = Depends(get_db)):
+    return update_user(db, user_id, user_data)
+
+@router.delete("/users/{user_id}", response_model=User)
+def delete_user_api(user_id: int, db: Session = Depends(get_db)):
+    return delete_user(db, user_id)
