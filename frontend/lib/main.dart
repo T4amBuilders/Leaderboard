@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'config.dart';
@@ -98,4 +98,24 @@ class _UserListState extends State<UserList> {
       ),
     );
   }
+}*/
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'src/app.dart';
+import 'src/providers/user_provider.dart';
+import 'src/services/api_service.dart';
+import 'src/config.dart';
+
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(ApiService(Config.apiUrl)),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
