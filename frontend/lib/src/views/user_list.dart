@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
+import '../providers/theme_provider.dart';
 
 class UserList extends StatefulWidget {
   @override
@@ -19,6 +20,14 @@ class _UserListState extends State<UserList> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Users'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.brightness_6),
+            onPressed: () {
+              Provider.of<ThemeProvider>(context, listen: false).nextTheme();
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Consumer<UserProvider>(
