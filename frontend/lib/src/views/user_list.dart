@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 import '../providers/theme_provider.dart';
+import '../providers/language_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserList extends StatefulWidget {
   @override
-  _UserListState createState() => _UserListState();
+  UserListState createState() => UserListState();
 }
 
-class _UserListState extends State<UserList> {
+class UserListState extends State<UserList> {
   @override
   void initState() {
     super.initState();
@@ -19,8 +21,16 @@ class _UserListState extends State<UserList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Users'),
+        title: Text(AppLocalizations.of(context)!.users),
         actions: [
+          IconButton(
+            icon: Icon(Icons.language),
+            onPressed: () {
+              // Exemple de changement vers le français
+              Provider.of<LanguageChangeProvider>(context, listen: false)
+                  .changeLanguage();
+            },
+          ),
           IconButton(
             icon: Icon(Icons.brightness_6),
             onPressed: () {

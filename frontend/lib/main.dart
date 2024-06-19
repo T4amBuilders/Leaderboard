@@ -6,6 +6,8 @@ import 'src/services/api_service.dart';
 import 'src/config.dart';
 import 'src/utils/theme/theme.dart';
 import 'src/providers/theme_provider.dart';
+import 'src/providers/language_provider.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(
@@ -17,6 +19,9 @@ void main() {
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(AppTheme.lightTheme, 0),
           child: MyApp(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LanguageChangeProvider(Locale('fr', ''), 0),
         ),
       ],
       child: MyApp(),
