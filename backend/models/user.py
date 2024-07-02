@@ -12,8 +12,10 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True)
-    full_name = Column(String)
-    password_hashed = Column(String)
+    full_name = Column(String, index=True)
+    password_hashed = Column(String, index=True)
+    adresse = Column(String, index=True)
+    phone = Column(String, index=True)
 
     # Méthode pour définir le mot de passe avec hachage
     def set_password(self, password):

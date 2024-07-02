@@ -55,3 +55,18 @@ __pycache__/
 
 # Backup directory
 *~
+
+# Alembic cache
+alembic/versions/*.pyc
+alembic/versions/*.pyo
+alembic/versions/*.pyd
+
+# Ignore alembic logs
+alembic/alembic.log
+
+# Ignore other alembic related files
+alembic/versions/__pycache__/
+
+# Ignore database migration files generated during development (if any)
+*.sqlite
+*.db
