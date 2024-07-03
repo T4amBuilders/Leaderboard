@@ -22,7 +22,7 @@ Ensure you have set up an SSH key with GitHub. Clone the repository to your loca
 
 ```bash
 
-git clone git@github.com:Dr4mT4am/Leaderboard.git
+git clone git@github.com:T4amBuilders/Leaderboard.git
 cd Leaderboard
 
 ```
