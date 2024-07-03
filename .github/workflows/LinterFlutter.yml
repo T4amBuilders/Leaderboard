@@ -15,6 +15,9 @@ jobs:
       with:
         flutter-version: '3.3.10'
 
+    - name: Go to the frontend folder
+      run: cd frontend/
+
     - name: Install dependencies
       run: flutter pub get
 
