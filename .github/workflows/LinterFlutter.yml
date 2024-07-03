@@ -16,7 +16,7 @@ jobs:
         flutter-version: '3.3.10'
 
     - name: Change to project directory
-      run: cd path/to/your/flutter/project
+      run: cd frontend/
 
     - name: Install dependencies
       run: flutter pub get
