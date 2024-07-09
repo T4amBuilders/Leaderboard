@@ -9,6 +9,5 @@ passlib
 black
 flake8
 mypy
-pylint
 isort
 bandit

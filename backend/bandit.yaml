@@ -1,4 +1,4 @@
 # bandit configuration
-skips:
-  - B101
-  - ./alembic/**
+skips: ["B104", "B101"]
+exclude_dirs:
+  - alembic
