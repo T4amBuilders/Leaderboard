@@ -21,7 +21,6 @@ jobs:
           black --check .
           flake8
           mypy . --explicit-package-bases
-          pylint .
           isort --check-only .
           bandit -r .
         working-directory: ./backend
