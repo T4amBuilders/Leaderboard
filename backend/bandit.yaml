@@ -1,0 +1,2 @@
+# bandit configuration
+skips: ["B101"]

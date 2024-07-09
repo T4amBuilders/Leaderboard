@@ -1,0 +1,8 @@
+[MASTER]
+ignore=tests
+
+[MESSAGES CONTROL]
+disable=C0111,  # missing-docstring
+
+[FORMAT]
+max-line-length=88
