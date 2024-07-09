@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from ..crud.user import create_user, delete_user, get_user, get_users, update_user
 from ..database import get_db
-from ..schemas.user import User, UserCreate, UserUpdate
+from ..schemas.user import User, UserCreate
 
 router = APIRouter()
 
