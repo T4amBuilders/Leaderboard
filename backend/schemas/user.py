@@ -10,10 +10,14 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
+    adresse: str
+    phone: str
 
 
 class UserUpdate(UserBase):
     password: str
+    adresse: str
+    phone: str
 
 
 class User(UserBase):
