@@ -18,13 +18,13 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(AppTheme.lightTheme, 0),
-          child: MyApp(),
+          child: const MyApp(),
         ),
         ChangeNotifierProvider(
-          create: (_) => LanguageChangeProvider(Locale('fr', ''), 0),
+          create: (_) => LanguageChangeProvider(const Locale('fr', ''), 0),
         ),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }

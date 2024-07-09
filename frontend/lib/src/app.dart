@@ -7,6 +7,7 @@ import 'providers/language_provider.dart';
 import 'views/user_list.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
@@ -15,18 +16,18 @@ class MyApp extends StatelessWidget {
           title: 'Flutter FastAPI Users',
           locale: Provider.of<LanguageChangeProvider>(context, listen: true)
               .currentLocale,
-          localizationsDelegates: [
+          localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             ...GlobalMaterialLocalizations.delegates,
           ],
-          supportedLocales: [
-            const Locale('en', ''), // Anglais
-            const Locale('fr', ''), // Français
+          supportedLocales: const [
+            Locale('en', ''), // Anglais
+            Locale('fr', ''), // Français
           ],
           theme: themeProvider.themeData,
-          home: UserList(),
+          home: const UserList(),
         );
       },
     );

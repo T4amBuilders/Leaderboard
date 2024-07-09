@@ -6,6 +6,7 @@ import '../providers/language_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserList extends StatefulWidget {
+  const UserList({Key? key}) : super(key: key);
   @override
   UserListState createState() => UserListState();
 }
@@ -24,7 +25,7 @@ class UserListState extends State<UserList> {
         title: Text(AppLocalizations.of(context)!.users),
         actions: [
           IconButton(
-            icon: Icon(Icons.language),
+            icon: const Icon(Icons.language),
             onPressed: () {
               // Exemple de changement vers le français
               Provider.of<LanguageChangeProvider>(context, listen: false)
@@ -32,7 +33,7 @@ class UserListState extends State<UserList> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.brightness_6),
+            icon: const Icon(Icons.brightness_6),
             onPressed: () {
               Provider.of<ThemeProvider>(context, listen: false).nextTheme();
             },
@@ -56,7 +57,7 @@ class UserListState extends State<UserList> {
               return Text(userProvider.errorMessage!);
             }
 
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           },
         ),
       ),

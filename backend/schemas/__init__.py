@@ -2,4 +2,3 @@
 from .user import UserCreate, User, BaseModel, UserUpdate
 
 # Add other schema imports here
-

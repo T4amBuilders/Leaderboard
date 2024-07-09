@@ -6,7 +6,7 @@ class AppTheme {
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
         .copyWith(secondary: Colors.orange),
     scaffoldBackgroundColor: Colors.white,
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.black),
       displayMedium: TextStyle(color: Colors.black54),
     ),
@@ -17,7 +17,7 @@ class AppTheme {
     colorScheme: ColorScheme.fromSwatch(brightness: Brightness.dark)
         .copyWith(secondary: Colors.red),
     scaffoldBackgroundColor: Colors.grey[900],
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.white),
       displayMedium: TextStyle(color: Colors.white70),
     ),
