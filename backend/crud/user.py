@@ -1,8 +1,9 @@
 # crud.py
 from sqlalchemy.orm import Session
-from models.user import User
-from schemas.user import UserCreate, UserUpdate
-from models.user import pwd_context
+
+from ..models.user import User, pwd_context
+from ..schemas.user import UserCreate
+
 
 def get_user(db: Session, user_id: int):
     return db.query(User).filter(User.id == user_id).first()

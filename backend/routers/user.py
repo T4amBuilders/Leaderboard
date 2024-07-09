@@ -1,18 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from crud.user import create_user, get_user, get_users, update_user, delete_user
-from database import SessionLocal
-from schemas.user import UserCreate, User, UserUpdate
+
+from ..crud.user import create_user, delete_user, get_user, get_users, update_user
+from ..database import get_db
+from ..schemas.user import User, UserCreate, UserUpdate
 
 router = APIRouter()
-
-# Dependency to get the database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.post("/users/", response_model=User)
 def create_user_api(user: UserCreate, db: Session = Depends(get_db)):
@@ -34,7 +27,7 @@ def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     return users
 
 @router.put("/users/{user_id}", response_model=User)
-def update_user_api(user_id: int, user_data: UserUpdate, db: Session = Depends(get_db)):
+def update_user_api():
     return update_user
 
 @router.delete("/users/{user_id}", response_model=User)
