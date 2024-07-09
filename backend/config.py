@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-# Charger les variables d'environnement à partir de .env
+# Load environment variables from .env
 load_dotenv()
 
 

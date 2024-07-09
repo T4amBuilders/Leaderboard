@@ -1,7 +1,7 @@
 # Using the Python base image for FastAPI
 FROM python:3.9-slim AS build
 
-# Installer les dépendances nécessaires pour la compilation
+# Install the dependencies required for compilation
 RUN apt-get update && apt-get install -y \
     build-essential \
     gcc \

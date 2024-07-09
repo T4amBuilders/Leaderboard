@@ -1,38 +1,38 @@
-# Définir les variables
+#Defining variables
 DOCKER_COMPOSE = docker-compose
 DOCKER_COMPOSE_FILE = docker-compose.yml
 
-# Construire l'image Docker
+# Building the Docker image
 build:
 	@echo "Building the Docker image..."
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) build
 
-# Lancer le conteneur Flutter en mode détaché
+# Launch the Flutter container in detached mode
 up:
 	@echo "Starting the Flutter web server..."
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up -d
 
-# Arrêter le conteneur
+# Stop the container
 down:
 	@echo "Stopping the Flutter web server..."
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) down
 
-# Redémarrer le conteneur
+# Restart the container
 restart:
 	@echo "Stopping the Flutter web server..."
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) restart
 
-# Visualiser les logs
+# View logs
 logs:
 	@echo "Displaying the logs..."
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) logs -f
 
-# Nettoyer les conteneurs, images et volumes
+# Cleaning containers, images and volumes
 clean:
 	@echo "Cleaning up Docker..."
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) down --rmi all --volumes --remove-orphans
 
-# Exécuter Flutter Web-dev
+# Run Flutter Web-dev
 web-dev:
 	@echo "Running Flutter for web..."
 	cd ./frontend && flutter run -d web-server --web-port 2256
