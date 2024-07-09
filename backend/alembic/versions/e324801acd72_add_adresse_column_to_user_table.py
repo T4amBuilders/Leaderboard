@@ -23,9 +23,7 @@ def upgrade() -> None:
     op.add_column("users", sa.Column("adresse", sa.String(), nullable=True))
     op.create_index(op.f("ix_users_adresse"), "users", ["adresse"], unique=False)
     op.create_index(op.f("ix_users_full_name"), "users", ["full_name"], unique=False)
-    op.create_index(
-        op.f("ix_users_password_hashed"), "users", ["password_hashed"], unique=False
-    )
+    op.create_index(op.f("ix_users_password_hashed"), "users", ["password_hashed"], unique=False)
     # ### end Alembic commands ###
 
 
