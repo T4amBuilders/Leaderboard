@@ -36,3 +36,8 @@ clean:
 web-dev:
 	@echo "Running Flutter for web..."
 	cd ./frontend && flutter run -d web-server --web-port 2256
+
+# Exécuter linter de tout le projet
+linter:
+	@echo "Running linter..."
+	./linter-script.sh
