@@ -1,8 +1,7 @@
 [tool.black]
 line-length = 100
 target-version = ['py38']
-exclude = ["alembic"]
-skips = ["B104"]
+
 
 [tool.isort]
 profile = "black"
