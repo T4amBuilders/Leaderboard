@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from .config import NeonConfig
+from config import NeonConfig
 
 DATABASE_URL: Optional[str] = NeonConfig.DATABASE_URL
 

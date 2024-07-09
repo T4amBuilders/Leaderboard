@@ -1,8 +1,8 @@
 # crud.py
 from sqlalchemy.orm import Session
 
-from ..models.user import User, pwd_context
-from ..schemas.user import UserCreate
+from models.user import User, pwd_context
+from schemas.user import UserCreate
 
 
 def get_user(db: Session, user_id: int):
@@ -10,7 +10,8 @@ def get_user(db: Session, user_id: int):
 
 
 def get_users(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(User).offset(skip).limit(limit).all()
+    users = db.query(User).offset(skip).limit(limit).all()
+    return users
 
 
 def create_user(db: Session, user: UserCreate):
