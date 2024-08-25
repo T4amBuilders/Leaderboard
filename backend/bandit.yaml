@@ -1,4 +1,0 @@
-# bandit configuration
-skips: ["B104", "B101"]
-exclude_dirs:
-  - alembic
