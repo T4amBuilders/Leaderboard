@@ -14,8 +14,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  intl: any
-  english_words: any
   provider: any
   http: any
   flutter_dotenv: any
@@ -37,4 +35,3 @@ flutter:
 scripts:
   analyze: dartanalyzer --fatal-infos --fatal-warnings .
   metrics: metrics lib
-
