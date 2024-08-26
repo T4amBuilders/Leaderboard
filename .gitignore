@@ -22,14 +22,42 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
 .dart_tool/
+.packages
 .flutter-plugins
 .flutter-plugins-dependencies
+.flutter-versions
+.buildlog/
 .pub-cache/
 .pub/
-/build/
+build/
+.idea/
+.vscode/
+*.iml
+
+# Linux related
+linux/flutter/generated_plugin_registrant.cc
+linux/flutter/ephemeral/
+
+# Windows related
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/ephemeral/
+
+# macOS related
+macos/flutter/generated_plugin_registrant.cc
+macos/flutter/ephemeral/
+
+# Android Studio files
+android/.idea/
+
+# Lock Files
+ios/Podfile.lock
+packages.lock.json
+pubspec.lock
+
+# Project specific
+.vscode/
+.idea/
 
 # Symbolication related
 app.*.symbols
@@ -56,17 +84,5 @@ __pycache__/
 # Backup directory
 *~
 
-# Alembic cache
-alembic/versions/*.pyc
-alembic/versions/*.pyo
-alembic/versions/*.pyd
-
-# Ignore alembic logs
-alembic/alembic.log
-
-# Ignore other alembic related files
-alembic/versions/__pycache__/
-
-# Ignore database migration files generated during development (if any)
-*.sqlite
-*.db
+# Ignore Firebase data file
+lib/firebase_data.dart
