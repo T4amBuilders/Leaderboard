@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -11,19 +11,76 @@ class SignInScreen extends StatefulWidget {
 }
 
 class SignInScreenState extends State<SignInScreen> {
-  final _emailController = TextEditingController();
+  final _emailOrUsernameController = TextEditingController();
   final _passwordController = TextEditingController();
   String? errorMessage;
 
-  Future<void> signInWithEmailAndPassword() async {
+  Future<String?> _getEmailFromUsername(String username) async {
     try {
+      final lowerCaseUsername =
+          username.trim().toLowerCase(); // Convertir le pseudo en minuscules
+      final QuerySnapshot result = await FirebaseFirestore.instance
+          .collection('users')
+          .where('username', isEqualTo: lowerCaseUsername)
+          .get();
+
+      if (result.docs.isNotEmpty) {
+        return result.docs.first['email'];
+      } else {
+        setState(() {
+          errorMessage = "L'email ou le pseudo est incorrect.";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = e.toString();
+      });
+    }
+    return null;
+  }
+
+  Future<void> signIn() async {
+    try {
+      String emailOrUsername = _emailOrUsernameController.text.trim();
+      String password = _passwordController.text.trim();
+      String? email;
+
+      if (emailOrUsername.contains('@')) {
+        // C'est un email
+        email = emailOrUsername;
+      } else {
+        // C'est un pseudo, chercher l'email correspondant
+        email = await _getEmailFromUsername(emailOrUsername);
+        if (email == null) return; // Arrêter si le pseudo est incorrect
+      }
+
+      // Connexion avec email et mot de passe
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
+        email: email,
+        password: password,
       );
     } on FirebaseAuthException catch (e) {
+      // Gérer les erreurs spécifiques
+      String errorText;
+      switch (e.code) {
+        case 'user-not-found':
+          errorText = 'Aucun utilisateur trouvé pour cet email.';
+          break;
+        case 'wrong-password':
+          errorText = 'Le mot de passe est incorrect.';
+          break;
+        case 'invalid-email':
+          errorText = 'L\'adresse email est invalide.';
+          break;
+        case 'too-many-requests':
+          errorText =
+              'Trop de tentatives de connexion. Veuillez réessayer plus tard.';
+          break;
+        default:
+          errorText = 'Une erreur est survenue : ${e.message}';
+      }
       setState(() {
-        errorMessage = e.message;
+        errorMessage = errorText;
       });
     }
   }
@@ -32,7 +89,7 @@ class SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign In'),
+        title: const Text('Connexion'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,18 +97,22 @@ class SignInScreenState extends State<SignInScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
+              controller: _emailOrUsernameController,
+              decoration: const InputDecoration(
+                labelText: 'Email ou Pseudo',
+              ),
             ),
             TextField(
               controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(
+                labelText: 'Mot de passe',
+              ),
               obscureText: true,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: signInWithEmailAndPassword,
-              child: const Text('Sign In'),
+              onPressed: signIn,
+              child: const Text('Se connecter'),
             ),
             const SizedBox(height: 20),
             errorMessage != null
@@ -67,7 +128,7 @@ class SignInScreenState extends State<SignInScreen> {
                   MaterialPageRoute(builder: (context) => const SignUpScreen()),
                 );
               },
-              child: const Text('Don\'t have an account? Sign Up'),
+              child: const Text('Vous n\'avez pas de compte ? S\'enregistrer'),
             ),
           ],
         ),
